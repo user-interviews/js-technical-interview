@@ -21,6 +21,7 @@
       padding-left: 0;
 
       li {
+        display: inline-block;
         margin: 0 1rem;
       }
     }
@@ -30,8 +31,13 @@
       text-transform: uppercase;
     }
   }
+}
 
-  &__header {
-    color: #FF0000;
-  }
+.btn-link {
+  background: none !important;
+  color: inherit;
+  border: none;
+  padding: 0 !important;
+  font: inherit;
+  cursor: pointer;
 }
