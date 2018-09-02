@@ -1,6 +1,36 @@
 .ui-app {
   text-align: center;
 
+  &__navbar {
+    width: 100%;
+    height: 4rem;
+
+    border-bottom: black 1px solid;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+
+      li {
+        margin: 0 1rem;
+      }
+    }
+
+    &__brand {
+      margin: 0 1rem;
+      text-transform: uppercase;
+    }
+  }
+
   &__header {
     color: #FF0000;
   }
