@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 
+import User from './models/user';
+
 import RootPage from './views/static_pages/root_page';
 import SignInPage from './views/users/sign_in_page';
 import UserPage from './views/users/user_page';
@@ -36,10 +38,7 @@ class AppContent extends React.Component {
 
   handleSignIn = () => {
     this.redirectToAccount(() => this.setState({
-      user: {
-        id: 1,
-        name: 'Bob',
-      },
+      user: new User({ id: 1, name: 'Bob' }),
     }));
   };
 
