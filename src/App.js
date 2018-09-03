@@ -68,8 +68,6 @@ class AppContent extends React.Component {
           </div>
           {this.renderHeaderLinks()}
         </nav>
-        <h1>Hello World!</h1>
-
         <div className="ui-app__content">
           <Route
             path="/account"
