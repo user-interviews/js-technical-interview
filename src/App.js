@@ -1,6 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 
+import RootPage from './views/static_pages/root_page';
 import SignInPage from './views/users/sign_in_page';
 import UserPage from './views/users/user_page';
 
@@ -17,26 +18,28 @@ class AppContent extends React.Component {
     return this.state.user;
   }
 
-  redirectTo(path) {
+  redirectTo(path, callback) {
     this.props.history.push(path);
+
+    if (callback) {
+      callback();
+    }
   }
 
-  redirectToRoot() {
-    this.redirectTo('/')
+  redirectToAccount(callback) {
+    this.redirectTo('/account', callback);
+  }
+
+  redirectToRoot(callback) {
+    this.redirectTo('/', callback);
   }
 
   handleSignIn = () => {
-    this.setState(
-      { user: { name: 'Bob' } },
-      () => this.redirectToRoot(),
-    );
+    this.redirectToAccount(() => this.setState({ user: { name: 'Bob' } }));
   };
 
   handleSignOut = () => {
-    this.setState(
-      { user: undefined },
-      () => this.redirectToRoot(),
-    );
+    this.redirectToRoot(() => this.setState({ user: undefined }));
   };
 
   renderHeaderLinks() {
@@ -69,18 +72,21 @@ class AppContent extends React.Component {
           {this.renderHeaderLinks()}
         </nav>
         <div className="ui-app__content">
-          <Route
-            path="/account"
-            render={props => (
-              <UserPage {...props} user={this.currentUser} />
-            )}
-          />
-          <Route
-            path="/sign-in"
-            render={props => (
-              <SignInPage {...props} onSignIn={this.handleSignIn} />
-            )}
-          />
+          <Switch>
+            <Route
+              path="/account"
+              render={props => (
+                <UserPage {...props} user={this.currentUser} />
+              )}
+            />
+            <Route
+              path="/sign-in"
+              render={props => (
+                <SignInPage {...props} onSignIn={this.handleSignIn} />
+              )}
+            />
+            <Route path="/" component={RootPage} />
+          </Switch>
         </div>
       </React.Fragment>
     );
