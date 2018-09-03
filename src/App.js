@@ -35,7 +35,12 @@ class AppContent extends React.Component {
   }
 
   handleSignIn = () => {
-    this.redirectToAccount(() => this.setState({ user: { name: 'Bob' } }));
+    this.redirectToAccount(() => this.setState({
+      user: {
+        id: 1,
+        name: 'Bob',
+      },
+    }));
   };
 
   handleSignOut = () => {
