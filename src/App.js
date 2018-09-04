@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 
 import User from './models/user';
 
+import ProjectsRouter from './views/projects/projects_router';
 import RootPage from './views/static_pages/root_page';
 import SignInPage from './views/users/sign_in_page';
 import UserPage from './views/users/user_page';
@@ -51,7 +52,10 @@ class AppContent extends React.Component {
       <ul>
         {
           this.currentUser &&
-            <li><Link to="/account">{this.currentUser.name}</Link></li>
+            <React.Fragment>
+              <li><Link to="/account">{this.currentUser.name}</Link></li>
+              <li><Link to="/projects/new">New Project</Link></li>
+            </React.Fragment>
         }
         {
           this.currentUser === undefined ?
@@ -82,6 +86,10 @@ class AppContent extends React.Component {
               render={props => (
                 <UserPage {...props} user={this.currentUser} />
               )}
+            />
+            <Route
+              path="/projects"
+              component={ProjectsRouter}
             />
             <Route
               path="/sign-in"
