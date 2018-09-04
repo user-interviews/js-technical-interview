@@ -21,6 +21,9 @@ export default class ProjectPage extends React.Component {
     return (
       <div className="project-page">
         <h1>Project #{this.project.id}</h1>
+        <p><b>Title:</b> {this.project.title}</p>
+        <p><b>Name:</b> {this.project.name}</p>
+        <p><b>Requested number of participants:</b> {this.project.numParticipants}</p>
       </div>
     );
   }
