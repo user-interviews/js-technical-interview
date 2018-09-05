@@ -8,18 +8,21 @@ export default class Project {
 
   static load(id) {
     // STUBBED OUT
-    return new Project({
-      id: id,
-      name: `Project ${id} [NAME]`,
-      numParticipants: 10,
-      title: `Project ${id} [TITLE]`,
+    return new Promise(resolve => {
+      resolve(new Project({
+        id,
+        name: `Project ${id} [NAME]`,
+        numParticipants: 10,
+        title: `Project ${id} [TITLE]`,
+      }));
     });
   }
 
   static save(project) {
-    project.id = Math.floor(Math.random() * 1000);
-
-    return project;
+    return new Promise(resolve => {
+      project.id = Math.floor(Math.random() * 1000);
+      resolve(project);
+    });
   }
 
   get id() {

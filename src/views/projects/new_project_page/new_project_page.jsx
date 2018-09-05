@@ -23,9 +23,7 @@ export default class NewProjectPage extends React.Component {
   }
 
   handleFormSubmit = (e) => {
-    const project = Project.save(this.project);
-
-    this.props.history.push(`/projects/${project.id}`);
+    Project.save(this.project).then(project => this.props.history.push(`/projects/${project.id}`));
 
     e.preventDefault();
     return false;

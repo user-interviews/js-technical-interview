@@ -6,11 +6,9 @@ export default class ProjectPage extends React.Component {
   constructor(props) {
     super(props);
 
-    const project_id = props.match.params.project_id;
+    this.state = { project: undefined };
 
-    this.state = {
-      project: Project.load(project_id),
-    };
+    Project.load(props.match.params.project_id).then(project => this.setState({ project }));
   }
 
   get project() {
@@ -18,6 +16,10 @@ export default class ProjectPage extends React.Component {
   }
 
   render() {
+    if (this.project === undefined) {
+      return <h1>Loading...</h1>;
+    }
+
     return (
       <div className="project-page">
         <h1>Project #{this.project.id}</h1>
