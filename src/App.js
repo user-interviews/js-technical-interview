@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 
 import User from './models/user';
 
+import ParticipantsRouter from './views/participants/participants_router';
 import ProjectsRouter from './views/projects/projects_router';
 import RootPage from './views/static_pages/root_page';
 import SignInPage from './views/users/sign_in_page';
@@ -53,6 +54,7 @@ class AppContent extends React.Component {
         {
           this.currentUser &&
             <React.Fragment>
+              <li><Link to="/participants">Participants</Link></li>
               <li><Link to="/account">{this.currentUser.name}</Link></li>
               <li><Link to="/projects/new">New Project</Link></li>
             </React.Fragment>
@@ -86,6 +88,10 @@ class AppContent extends React.Component {
               render={props => (
                 <UserPage {...props} user={this.currentUser} />
               )}
+            />
+            <Route
+              path="/participants"
+              component={ParticipantsRouter}
             />
             <Route
               path="/projects"
