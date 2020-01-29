@@ -2,13 +2,26 @@ import React from 'react';
 
 import Project from '../../../models/project';
 
+import ProjectsService from '../../../services/projects_service';
+
 export default class ProjectPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { project: undefined };
+    this.state = {
+      participants: [],
+      project: undefined,
+    };
 
-    Project.load(props.match.params.project_id).then(project => this.setState({ project }));
+    const projectId = props.match.params.project_id;
+
+    Project.load(projectId).then(project => this.setState({ project }));
+    ProjectsService.loadParticipantsForProject(projectId)
+      .then(participants => this.setState({ participants }));
+  }
+
+  get participants() {
+    return this.state.participants;
   }
 
   get project() {
@@ -25,7 +38,12 @@ export default class ProjectPage extends React.Component {
         <h1>Project #{this.project.id}</h1>
         <p><b>Title:</b> {this.project.title}</p>
         <p><b>Name:</b> {this.project.name}</p>
-        <p><b>Requested number of participants:</b> {this.project.numParticipants}</p>
+
+        {
+          this.participants.length >= this.project.numParticipants ?
+            <p>This project is <b>FULL</b></p> :
+            <a href={`/projects/${this.project.id}/signup`}>Apply!</a>
+        }
       </div>
     );
   }
