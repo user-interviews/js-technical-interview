@@ -5,6 +5,7 @@ import User from './models/user';
 
 import ProjectsRouter from './views/projects/projects_router';
 import RootPage from './views/static_pages/root_page';
+import ParticipantPage from './views/participants/participant_page'
 import SignInPage from './views/users/sign_in_page';
 import UserPage from './views/users/user_page';
 
@@ -54,6 +55,7 @@ class AppContent extends React.Component {
           this.currentUser &&
             <React.Fragment>
               <li><Link to="/account">{this.currentUser.name}</Link></li>
+              <li><Link to="/participants">Participants</Link></li>
               <li><Link to="/projects/new">New Project</Link></li>
             </React.Fragment>
         }
@@ -86,6 +88,10 @@ class AppContent extends React.Component {
               render={props => (
                 <UserPage {...props} user={this.currentUser} />
               )}
+            />
+            <Route
+              path="/participants"
+              component={ParticipantPage}
             />
             <Route
               path="/projects"
